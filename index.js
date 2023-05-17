@@ -11,9 +11,6 @@ app.use((req, res, next) =>{
 });
 const port = 3000;
 
-app.listen(port, () => {
-  console.log('Сервер запущен на порту 3000');
-});
 
 // Парсер для обработки данных запроса в формате JSON
 
