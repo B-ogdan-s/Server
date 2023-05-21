@@ -2,6 +2,8 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
+app.use(express.json());
+
 app.use((req, res, next) =>{
   res.setHeader('Access-Control-Allow-Origin', 'https://b-ogdan-s.github.io');
   // Другие заголовки CORS, если необходимо
