@@ -1,10 +1,8 @@
 const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 app.use(express.json());
-app.use('/addmaterial', createProxyMiddleware({ target: 'https://test-server-1w9i.onrender.com', changeOrigin: true }));
 
 app.use((req, res, next) =>{
   res.setHeader('Access-Control-Allow-Origin', 'https://b-ogdan-s.github.io');
