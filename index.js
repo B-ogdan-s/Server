@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 app.use(express.json());
+app.use(cors({ origin: 'https://b-ogdan-s.github.io' }));
 
 app.use((req, res, next) =>{
   res.setHeader('Access-Control-Allow-Origin', 'https://b-ogdan-s.github.io');
