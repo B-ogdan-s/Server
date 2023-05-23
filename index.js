@@ -19,6 +19,22 @@ const port = 3000;
 // создание базы данных
 const db = new sqlite3.Database('mydb.sqlite');
 
+const handleExit = () => {
+  console.log('Сохранение базы данных перед закрытием сервера...');
+  
+  db.close((err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('База данных успешно сохранена и закрыта.');
+    process.exit(0); // Завершение процесса Node.js
+  });
+};
+
+// Регистрация обработчика события перед закрытием сервера
+process.on('SIGINT', handleExit); // Обработка сигнала прерывания (Ctrl+C)
+process.on('SIGTERM', handleExit); // Обработка сигнала завершения
+
 // Получение всех моделей
 app.get('/models', (req, res) => {
   db.all(`SELECT * FROM Models`, [], (err, rows) => {
@@ -84,6 +100,10 @@ app.post('/addmaterial', (req, res) => {
 });
 
 // запуск сервера
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+const server = app.listen(3000, () => {
+  console.log('Сервер запущен на порту 3000');
+});
+
+server.on('close', () => {
+  handleExit();
 });
