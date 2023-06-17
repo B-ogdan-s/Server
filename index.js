@@ -40,6 +40,18 @@ app.get('/usersModels', (req, res) => {
     res.json(rows);
   });
 });
+
+// получение пользователя
+app.get('/readUser', (req, res) => {
+  const { Name, Password } = req.query;
+  db.all(`SELECT * FROM Models WHERE Name = ? and Password = ?`, [Name, Password], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(rows);
+  });
+});
+
 // получение материалов по ID пользователя 
 app.get('/usersMaterials', (req, res) => {
   const { UsersId } = req.query;
@@ -80,7 +92,7 @@ app.post('/addmodel', (req, res) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ message: 'User added successfully' });
+    res.json({ message: 'Model added successfully' });
   });
 });
 
@@ -91,7 +103,7 @@ app.post('/addmaterial', (req, res) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ message: 'User added successfully' });
+    res.json({ message: 'Material added  successfully' });
   });
 });
 
