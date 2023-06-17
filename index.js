@@ -44,7 +44,7 @@ app.get('/usersModels', (req, res) => {
 // получение пользователя
 app.get('/readUser', (req, res) => {
   const { Name, Password } = req.query;
-  db.all(`SELECT * FROM Models WHERE Name = ? and Password = ?`, [Name, Password], (err, rows) => {
+  db.all(`SELECT * FROM Users WHERE Name = ? and Password = ?`, [Name, Password], (err, rows) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
